@@ -33,7 +33,10 @@ defmodule ActivityLogger.ActivityLogging do
   """
   defmacro activity_logging do
     quote do
+      field(:encrypted_changes, :map, virtual: true)
+      field(:encrypted_fields, {:array, :string}, virtual: true)
       field(:originator, VirtualStruct, virtual: true)
+      field(:prevent_saving, :boolean, virtual: true)
     end
   end
 

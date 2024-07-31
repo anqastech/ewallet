@@ -73,7 +73,7 @@ defmodule AdminAPI.V1.BlockchainWalletController do
          {:ok, _} <- authorize(:view_balance, conn.assigns, wallet),
          %Paginator{data: tokens, pagination: pagination} <- paginated_tokens(attrs),
          {:ok, data} <- BlockchainBalanceLoader.balances(wallet.address, tokens) do
-      render(conn, BalanceView, :balances, %Paginator{pagination: pagination, data: data})
+      render(conn, BalanceView, :balances, %{pagination: pagination, data: data})
     else
       {:error, error} -> handle_error(conn, error)
       {:error, error, description} -> handle_error(conn, error, description)

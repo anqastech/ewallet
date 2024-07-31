@@ -27,7 +27,8 @@ defmodule Utils.Types.ExternalID do
   This module also provides a helper macro `external_id/1` for setting up a schema field
   that autogenerates the external ID.
   """
-  @behaviour Ecto.Type
+  use Ecto.Type
+
   alias Ecto.Schema
   alias ExULID.ULID
 

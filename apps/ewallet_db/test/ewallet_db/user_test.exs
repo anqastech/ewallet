@@ -313,9 +313,7 @@ defmodule EWalletDB.UserTest do
 
       refute changeset.valid?
 
-      assert changeset.errors == [
-               email: {"can't be blank", [validation: :required]}
-             ]
+      assert %{email: ["can't be blank"]} = errors_on(changeset)
     end
   end
 

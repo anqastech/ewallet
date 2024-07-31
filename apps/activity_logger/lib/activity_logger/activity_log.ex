@@ -39,7 +39,7 @@ defmodule ActivityLogger.ActivityLog do
     field(:target_uuid, UUID)
     field(:target_identifier, :string)
     field(:target_changes, :map)
-    field(:target_encrypted_changes, ActivityLogger.Encrypted.Map, default: %{})
+    field(:target_encrypted_changes, ActivityLogger.Encrypted.Map, default: %{}, skip_default_validation: true)
 
     field(:originator_uuid, UUID)
     field(:originator_type, :string)

@@ -64,7 +64,11 @@ defmodule EWalletDB.Transaction do
     field(:calculated_at, :naive_datetime_usec)
 
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, EWalletDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, EWalletDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
 
     belongs_to(
       :from_token,

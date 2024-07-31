@@ -20,18 +20,23 @@ defmodule Utils.Types.Integer do
   since this `:decimal` type requires its own functions to operate, e.g. `Decimal.add/2`,
   and we only work with whole numbers, we can safely convert to Elixir's primitive integer for easier operations.
   """
-  @behaviour Ecto.Type
+  use Ecto.Type
+
   def type, do: :integer
 
   def cast(value) do
     {:ok, value}
   end
 
+  def load(value) when is_integer(value), do: {:ok, value}
+
   def load(value) do
     {:ok, Decimal.to_integer(value)}
   end
 
   def load!(nil), do: 0
+
+  def load!(value) when is_integer(value), do: value
 
   def load!(value), do: Decimal.to_integer(value)
 

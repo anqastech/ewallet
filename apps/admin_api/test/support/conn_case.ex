@@ -27,7 +27,8 @@ defmodule AdminAPI.ConnCase do
   of the test unless the test case is marked as async.
   """
   use ExUnit.CaseTemplate
-  use Phoenix.ConnTest
+  import Plug.Conn
+  import Phoenix.ConnTest
   import Ecto.Query
   import EWalletDB.Factory
   alias Ecto.Adapters.SQL.Sandbox
@@ -63,12 +64,13 @@ defmodule AdminAPI.ConnCase do
   @provider_user_id "test_provider_user_id"
   @auth_token "test_auth_token"
 
-  @base_dir "api/admin/"
+  @base_dir "/api/admin"
 
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
       import AdminAPI.ConnCase
       import AdminAPI.Router.Helpers
       import EWalletDB.Factory
@@ -593,9 +595,9 @@ defmodule AdminAPI.ConnCase do
       admin_test_name = :"#{test_name} with admin_auth"
       provider_test_name = :"#{test_name} with provider_auth"
 
-      {_, describe} = Module.get_attribute(__MODULE__, :ex_unit_describe)
-      admin_func_name = :"#{describe} #{admin_test_name}"
-      provider_func_name = :"#{describe} #{provider_test_name}"
+      {_line, message, _counter} = Module.get_attribute(__MODULE__, :ex_unit_describe)
+      admin_func_name = :"#{message} #{admin_test_name}"
+      provider_func_name = :"#{message} #{provider_test_name}"
 
       def unquote(admin_func_name)(unquote(var)), do: unquote(admin_test_block)
       def unquote(provider_func_name)(unquote(var)), do: unquote(provider_test_block)

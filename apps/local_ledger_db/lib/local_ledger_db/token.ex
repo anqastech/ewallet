@@ -28,7 +28,11 @@ defmodule LocalLedgerDB.Token do
   schema "token" do
     field(:id, :string)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
 
     has_many(
       :entries,

@@ -74,10 +74,7 @@ defmodule EWallet.MintGateTest do
         })
 
       assert res == :error
-
-      assert changeset.errors == [
-               amount: {"can't be blank", [validation: :required]}
-             ]
+      assert %{amount: ["can't be blank"]} = errors_on(changeset)
     end
   end
 end

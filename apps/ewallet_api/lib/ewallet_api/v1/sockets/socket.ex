@@ -26,8 +26,6 @@ defmodule EWalletAPI.V1.Socket do
   channel("transaction_request:*", EWalletAPI.V1.TransactionRequestChannel)
   channel("transaction_consumption:*", EWalletAPI.V1.TransactionConsumptionChannel)
 
-  transport(:websocket, Phoenix.Transports.WebSocket)
-
   def connect(params, socket) do
     case ClientAuth.authenticate(params) do
       %{authenticated: true} = client_auth ->

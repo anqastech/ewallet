@@ -28,7 +28,11 @@ defmodule LocalLedgerDB.Wallet do
   schema "wallet" do
     field(:address, :string)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
 
     has_many(
       :entries,

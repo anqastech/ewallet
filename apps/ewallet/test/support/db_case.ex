@@ -124,4 +124,16 @@ defmodule EWallet.DBCase do
   def is_url?(url) do
     String.starts_with?(url, "https://") || String.starts_with?(url, "http://")
   end
+
+  def errors_on(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+      Regex.replace(~r"%{(\w+)}", message, fn _pattern, key ->
+        key_to_atom = String.to_existing_atom(key)
+
+        opts
+        |> Keyword.get(key_to_atom, key)
+        |> to_string()
+      end)
+    end)
+  end
 end

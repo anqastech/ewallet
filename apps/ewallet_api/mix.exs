@@ -10,9 +10,9 @@ defmodule EWalletAPI.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -43,14 +43,14 @@ defmodule EWalletAPI.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:bypass, "~> 1.0.0", only: [:test]},
       {:cors_plug, "~> 1.5"},
       {:deferred_config, "~> 0.1.0"},
@@ -59,7 +59,8 @@ defmodule EWalletAPI.Mixfile do
       {:ewallet_db, in_umbrella: true},
       {:jason, "~> 1.1"},
       {:peerage, "~> 1.0.2"},
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "1.5.14"},
+      {:phoenix_pubsub, "~> 2.1"},
       {:plug_cowboy, "~> 1.0"},
       {:sentry, "~> 7.0"}
     ]

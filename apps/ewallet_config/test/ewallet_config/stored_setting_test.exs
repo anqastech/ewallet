@@ -69,7 +69,7 @@ defmodule EWalletConfig.StoredSettingTest do
       changeset = StoredSetting.changeset(record, attrs)
 
       refute changeset.valid?
-      assert changeset.errors == [type: {"is invalid", [validation: :inclusion]}]
+      assert %{type: ["is invalid"]} = errors_on(changeset)
     end
 
     test "returns an invalid changeset if both `data` and `encrypted_data` are given", context do
@@ -96,10 +96,7 @@ defmodule EWalletConfig.StoredSettingTest do
       changeset = StoredSetting.changeset(record, attrs)
 
       refute changeset.valid?
-
-      assert changeset.errors == [
-               value: {"must be of type 'integer'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'integer'"]} = errors_on(changeset)
     end
 
     test "returns an invalid changeset if the `value` is not in the `options`", context do
@@ -113,10 +110,7 @@ defmodule EWalletConfig.StoredSettingTest do
       changeset = StoredSetting.changeset(record, attrs)
 
       refute changeset.valid?
-
-      assert changeset.errors == [
-               value: {"must be one of 'one', 'two', 'three'", [validation: :value_not_allowed]}
-             ]
+      assert %{value: ["must be one of 'one', 'two', 'three'"]} = errors_on(changeset)
     end
   end
 
@@ -198,10 +192,7 @@ defmodule EWalletConfig.StoredSettingTest do
       changeset = StoredSetting.update_changeset(context.record, attrs)
 
       refute changeset.valid?
-
-      assert changeset.errors == [
-               value: {"must be one of 'one', 'two', 'three'", [validation: :value_not_allowed]}
-             ]
+      assert %{value: ["must be one of 'one', 'two', 'three'"]} = errors_on(changeset)
     end
   end
 end

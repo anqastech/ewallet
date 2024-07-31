@@ -26,10 +26,10 @@ defmodule LoadTester.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:httpoison, "~> 1.0", override: true},
       {:chaperon, "~> 0.2.3"},
-      {:deferred_config, "~> 0.1.0"},
+      {:deferred_config, "~> 0.1.0"}
     ]
   end
 end

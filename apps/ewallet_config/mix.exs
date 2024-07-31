@@ -32,7 +32,7 @@ defmodule EWalletConfig.MixProject do
   def application do
     [
       extra_applications: [:appsignal, :logger],
-      mod: {EWalletConfig.Application, []},
+      mod: {EWalletConfig.Application, []}
     ]
   end
 
@@ -40,11 +40,11 @@ defmodule EWalletConfig.MixProject do
   defp deps do
     [
       {:activity_logger, in_umbrella: true},
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:arc, "~> 0.11.0"},
-      {:arc_ecto, github: "omisego/arc_ecto"},
+      {:arc_ecto, github: "almirsarajcic/arc_ecto"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:cloak, "~> 0.9.1"},
+      {:cloak_ecto, "~> 1.1"},
       {:db, in_umbrella: true},
       {:deferred_config, "~> 0.1.0"},
       {:ecto_sql, "~> 3.0"},
@@ -64,7 +64,7 @@ defmodule EWalletConfig.MixProject do
 
       # Quantum scheduler dependencies
       {:quantum, ">= 2.2.6"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 

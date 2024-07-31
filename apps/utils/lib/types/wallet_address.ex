@@ -25,7 +25,8 @@ defmodule Utils.Types.WalletAddress do
   This module also provides a helper macro `wallet_address/1` for setting up
   a schema field that autogenerates the wallet address.
   """
-  @behaviour Ecto.Type
+  use Ecto.Type
+
   alias Ecto.Schema
   alias Utils.Helpers.UUID
 

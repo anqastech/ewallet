@@ -34,6 +34,12 @@ defmodule Status.Mixfile do
     ]
   end
 
-  defp deps, do: [{:utils, in_umbrella: true}]
+  defp deps do
+    [
+      {:appsignal, "~> 1.13.5"},
+      {:utils, in_umbrella: true}
+    ]
+  end
+
   defp aliases, do: []
 end

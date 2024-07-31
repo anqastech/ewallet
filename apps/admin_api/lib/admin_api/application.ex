@@ -34,6 +34,7 @@ defmodule AdminAPI.Application do
     # is not guarantee to be started, so we should not try to access the
     # :url_dispatcher env here.
     children = [
+      {Phoenix.PubSub, name: AdminAPI.PubSub},
       supervisor(AdminAPI.Endpoint, []),
       supervisor(AdminAPI.V1.Endpoint, [])
     ]

@@ -16,7 +16,8 @@ defmodule Utils.Types.VirtualStruct do
   @moduledoc """
   Useless type used for the virtual struct "originator".
   """
-  @behaviour Ecto.Type
+  use Ecto.Type
+
   def type, do: :virtual_struct
 
   def cast(value) do

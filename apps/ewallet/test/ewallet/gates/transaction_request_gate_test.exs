@@ -399,7 +399,7 @@ defmodule EWallet.TransactionRequestGateTest do
           "originator" => %System{}
         })
 
-      assert changeset.errors == [type: {"is invalid", [validation: :inclusion]}]
+      assert %{type: ["is invalid"]} = errors_on(changeset)
     end
 
     test "receives a 'unauthorized' error when the address is invalid", meta do
@@ -564,7 +564,7 @@ defmodule EWallet.TransactionRequestGateTest do
           "originator" => %System{}
         })
 
-      assert changeset.errors == [type: {"is invalid", [validation: :inclusion]}]
+      assert %{type: ["is invalid"]} = errors_on(changeset)
     end
 
     test "receives a 'invalid_parameter' error when the wallet is nil", meta do

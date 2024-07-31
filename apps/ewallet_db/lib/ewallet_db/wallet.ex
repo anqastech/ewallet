@@ -62,7 +62,12 @@ defmodule EWalletDB.Wallet do
     field(:name, :string)
     field(:identifier, :string)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, EWalletDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, EWalletDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
+
     field(:enabled, :boolean)
     activity_logging()
 

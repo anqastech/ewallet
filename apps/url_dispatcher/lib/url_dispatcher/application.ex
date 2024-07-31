@@ -99,7 +99,7 @@ defmodule UrlDispatcher.Application do
     websocket_spec(prefix, ws_handler, endpoint, endpoint.__sockets__())
   end
 
-  defp websocket_spec(prefix, ws_handler, endpoint, [{path, socket} | t]) do
+  defp websocket_spec(prefix, ws_handler, endpoint, [{path, socket, _} | t]) do
     _ = Logger.info("Running #{inspect(endpoint)} WebSocket endpoint at #{prefix}#{path}.")
 
     [

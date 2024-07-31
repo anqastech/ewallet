@@ -60,7 +60,11 @@ defmodule EWalletDB.Token do
     field(:locked, :boolean)
     field(:avatar, EWalletDB.Uploaders.Avatar.Type)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, EWalletDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, EWalletDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
 
     field(:enabled, :boolean)
     field(:blockchain_address, :string)

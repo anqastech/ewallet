@@ -10,7 +10,7 @@ defmodule EthBlockchain.MixProject do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -26,12 +26,13 @@ defmodule EthBlockchain.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:exth_crypto, "~> 0.1.6"},
+      {:ex_abi, "~> 0.8.0", app: false},
+      {:exth_crypto, github: "almirsarajcic/exth_crypto", branch: "fix-deps"},
       {:ex_rlp, "~> 0.5.2"},
       {:utils, in_umbrella: true},
       {:keychain, in_umbrella: true}

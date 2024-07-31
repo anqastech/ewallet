@@ -17,7 +17,6 @@ defmodule Frontend.Application do
   use Application
   require Logger
   alias Frontend.Endpoint
-  alias Phoenix.Endpoint.Watcher
   alias Utils.Helpers.Normalize
   import Supervisor.Spec
 
@@ -31,32 +30,6 @@ defmodule Frontend.Application do
     # is not guarantee to be started, so we should not try to access the
     # :url_dispatcher env here.
     children = [supervisor(Endpoint, [])]
-
-    # Simply spawn a webpack process as part of supervision tree in case
-    # webpack_watch is enabled. It probably doesn't make sense to watch
-    # webpack without enabling endpoint serving, but we allow it anyway.
-    webpack_watch = Application.get_env(:frontend, :webpack_watch)
-
-    children =
-      children ++
-        case Normalize.to_boolean!(webpack_watch) do
-          true ->
-            _ = Logger.info("Enabling webpack watcher.")
-
-            # Webpack watcher is only for development, and rely on assets path
-            # being present (which doesn't in production); so this is using
-            # __DIR__ to make it expand to source path rather than compiled path.
-            [
-              worker(
-                Watcher,
-                [:npm, ["run", "build"], [cd: Path.expand("../../assets/", __DIR__)]],
-                restart: :transient
-              )
-            ]
-
-          _ ->
-            []
-        end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

@@ -26,7 +26,12 @@ defmodule LocalLedgerDB.Transaction do
 
   schema "transaction" do
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, LocalLedgerDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
+
     field(:idempotency_token, :string)
 
     has_many(

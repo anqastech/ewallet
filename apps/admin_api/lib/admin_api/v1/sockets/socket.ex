@@ -26,8 +26,6 @@ defmodule AdminAPI.V1.Socket do
   channel("transaction_request:*", AdminAPI.V1.TransactionRequestChannel)
   channel("transaction_consumption:*", AdminAPI.V1.TransactionConsumptionChannel)
 
-  transport(:websocket, Phoenix.Transports.WebSocket)
-
   def connect(params, socket) do
     case AdminAPIAuth.authenticate(params) do
       %{authenticated: true} = auth ->

@@ -36,7 +36,7 @@ defmodule AdminAPI.V1.BalanceController do
          {:ok, _} <- authorize(:view_balance, conn.assigns, wallet),
          %Paginator{data: tokens, pagination: pagination} <- all_tokens(attrs),
          {:ok, data} <- BalanceLoader.add_balances(wallet, tokens) do
-      render(conn, :balances, %Paginator{pagination: pagination, data: data})
+      render(conn, :balances, %{pagination: pagination, data: data})
     else
       {:error, error} -> handle_error(conn, error)
       {:error, error, description} -> handle_error(conn, error, description)

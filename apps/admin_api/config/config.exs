@@ -38,10 +38,7 @@ config :admin_api, AdminAPI.V1.Endpoint,
     accepts: ~w(json),
     default_format: "json"
   ],
-  pubsub: [
-    name: AdminAPI.PubSub,
-    adapter: Phoenix.PubSub.PG2
-  ],
+  pubsub_server: AdminAPI.PubSub,
   instrumenters: [Appsignal.Phoenix.Instrumenter]
 
 # Config for Phoenix's generators
@@ -51,6 +48,8 @@ config :admin_api, :generators, context_app: false
 config :phoenix, :template_engines,
   eex: Appsignal.Phoenix.Template.EExEngine,
   exs: Appsignal.Phoenix.Template.ExsEngine
+
+config :phoenix, :json_library, Jason
 
 # Two configs need to be added to have a new EWallet Admin version:
 #
@@ -73,7 +72,13 @@ config :admin_api, :api_versions, %{
 # what format to respond with.
 # Run `mix deps.clean --build mime` when updaing this mapping.
 config :mime, :types, %{
-  "application/vnd.omisego.v1+json" => ["json"]
+  "application/vnd.omisego.v1+json" => ["json"],
+  "text/vnd.omisego.v1+csv" => ["csv"]
+}
+
+config :mime, :extensions, %{
+  "csv" => "text/vnd.omisego.v1+csv",
+  "json" => "application/vnd.omisego.v1+json"
 }
 
 # Configs for Sentry exception reporting

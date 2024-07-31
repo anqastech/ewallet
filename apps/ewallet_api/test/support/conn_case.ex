@@ -27,7 +27,8 @@ defmodule EWalletAPI.ConnCase do
   of the test unless the test case is marked as async.
   """
   use ExUnit.CaseTemplate
-  use Phoenix.ConnTest
+  import Plug.Conn
+  import Phoenix.ConnTest
   import EWalletDB.Factory
   import Ecto.Query
   alias Ecto.Adapters.SQL.Sandbox
@@ -58,7 +59,8 @@ defmodule EWalletAPI.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
       import EWalletAPI.ConnCase
       import EWalletAPI.Router.Helpers
       import EWalletDB.Factory

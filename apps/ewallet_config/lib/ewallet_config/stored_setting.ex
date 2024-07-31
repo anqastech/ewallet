@@ -50,6 +50,7 @@ defmodule EWalletConfig.StoredSetting do
     field(:parent_value, :string)
     field(:secret, :boolean, default: false)
     field(:position, :integer)
+    field(:value, :string, virtual: true)
 
     timestamps()
     activity_logging()

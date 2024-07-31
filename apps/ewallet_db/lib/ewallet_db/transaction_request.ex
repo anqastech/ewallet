@@ -80,7 +80,11 @@ defmodule EWalletDB.TransactionRequest do
     field(:expiration_reason, :string)
     field(:allow_amount_override, :boolean, default: true)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, EWalletDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, EWalletDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
 
     has_many(
       :consumptions,

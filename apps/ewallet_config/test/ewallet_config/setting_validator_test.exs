@@ -82,9 +82,7 @@ defmodule EWalletConfig.SettingValidatorTest do
 
       refute changeset.valid?
 
-      assert changeset.errors == [
-               value: {"must be one of 'one', 'two', 'three'", [validation: :value_not_allowed]}
-             ]
+      assert %{value: ["must be one of 'one', 'two', 'three'"]} = errors_on(changeset)
     end
   end
 

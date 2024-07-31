@@ -10,9 +10,9 @@ defmodule Frontend.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -36,17 +36,17 @@ defmodule Frontend.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:ewallet_config, in_umbrella: true},
       {:ewallet_db, in_umbrella: true},
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "1.5.14"},
       {:plug_cowboy, "~> 1.0"}
     ]
   end

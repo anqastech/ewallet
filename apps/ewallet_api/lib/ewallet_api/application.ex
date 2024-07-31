@@ -34,6 +34,7 @@ defmodule EWalletAPI.Application do
     # is not guarantee to be started, so we should not try to access the
     # :url_dispatcher env here.
     children = [
+      {Phoenix.PubSub, name: EWalletAPI.PubSub},
       supervisor(EWalletAPI.Endpoint, []),
       supervisor(EWalletAPI.V1.Endpoint, [])
     ]

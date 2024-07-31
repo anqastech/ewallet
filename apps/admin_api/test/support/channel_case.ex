@@ -126,11 +126,13 @@ defmodule AdminAPI.ChannelCase do
   end
 
   def admin_auth_socket(admin_id \\ @admin_id) do
-    socket("test", %{auth: %{authenticated: true, admin_user: User.get(admin_id)}})
+    socket(AdminAPI.V1.Socket, "test", %{
+      auth: %{authenticated: true, admin_user: User.get(admin_id)}
+    })
   end
 
   def key_auth_socket(access_key \\ @access_key) do
-    socket("test", %{
+    socket(AdminAPI.V1.Socket, "test", %{
       auth: %{authenticated: true, key: Key.get_by(%{access_key: access_key})}
     })
   end

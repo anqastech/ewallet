@@ -10,7 +10,7 @@ defmodule Keychain.MixProject do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -20,7 +20,7 @@ defmodule Keychain.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:appsignal, :logger],
       mod: {Keychain.Application, []}
     ]
   end
@@ -28,12 +28,13 @@ defmodule Keychain.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:cloak, "~> 0.9.1"},
+      {:appsignal, "~> 1.13.5"},
+      {:cloak_ecto, "~> 1.1"},
       {:deferred_config, "~> 0.1.0"},
       {:ecto_sql, "~> 3.0"},
       {:ex_machina, "~> 2.2", only: :test},
       {:postgrex, ">= 0.0.0"},
-      {:exth_crypto, "~> 0.1.6"},
+      {:exth_crypto, github: "almirsarajcic/exth_crypto", branch: "fix-deps"},
       {:utils, in_umbrella: true}
     ]
   end

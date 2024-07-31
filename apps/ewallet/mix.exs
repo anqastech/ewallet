@@ -10,9 +10,9 @@ defmodule EWallet.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -34,13 +34,13 @@ defmodule EWallet.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:activity_logger, in_umbrella: true},
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:bamboo, "~> 0.8"},
       {:bamboo_smtp, "~> 1.4.0"},
       {:eth_blockchain, in_umbrella: true},
@@ -54,9 +54,9 @@ defmodule EWallet.Mixfile do
       {:jason, "~> 1.1"},
       {:local_ledger, in_umbrella: true},
       {:local_ledger_db, in_umbrella: true},
-      {:phoenix, "~> 1.3.0"},
-      {:phoenix_html, "~> 2.11.0"},
-      {:pot, "~>0.9.6"},
+      {:phoenix, "1.5.14"},
+      {:phoenix_html, "~> 2.13"},
+      {:pot, "~> 1.0"},
       {:quantum, "~> 2.3.4"},
       {:sentry, "~> 7.0"},
       {:timex, "~> 3.0"}

@@ -132,7 +132,7 @@ defmodule EWalletDB.TransactionRequestTest do
         |> params_for(type: "fake")
         |> TransactionRequest.insert()
 
-      assert changeset.errors == [type: {"is invalid", [validation: :inclusion]}]
+      assert %{type: ["is invalid"]} = errors_on(changeset)
     end
 
     test "allows creation with an amount equal to nil" do

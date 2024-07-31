@@ -10,7 +10,7 @@ defmodule LocalLedger.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -29,15 +29,16 @@ defmodule LocalLedger.Mixfile do
       mod: {LocalLedger.Application, []}
     ]
   end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:deferred_config, "~> 0.1.0"},
       {:ewallet_config, in_umbrella: true},
       {:local_ledger_db, in_umbrella: true},
       {:quantum, ">= 2.3.4"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 end

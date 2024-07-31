@@ -58,7 +58,12 @@ defmodule EWalletDB.User do
     field(:password_hash, :string)
     field(:provider_user_id, :string)
     field(:metadata, :map, default: %{})
-    field(:encrypted_metadata, EWalletDB.Encrypted.Map, default: %{})
+
+    field(:encrypted_metadata, EWalletDB.Encrypted.Map,
+      default: %{},
+      skip_default_validation: true
+    )
+
     field(:avatar, EWalletDB.Uploaders.Avatar.Type)
     field(:enabled, :boolean, default: true)
     field(:enabled_2fa_at, :naive_datetime)

@@ -70,7 +70,7 @@ defmodule ActivityLogger.ActivityLoggingTest do
         ActivityLogging.cast_and_validate_required_for_activity_log(%TestDocument{}, attrs)
 
       refute changeset.valid?
-      assert changeset.errors == [originator: {"can't be blank", [validation: :required]}]
+      assert %{originator: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "invalidates the changeset if the required field is missing", meta do
@@ -85,7 +85,19 @@ defmodule ActivityLogger.ActivityLoggingTest do
         )
 
       refute changeset.valid?
-      assert changeset.errors == [title: {"can't be blank", [validation: :required]}]
+      assert %{title: ["can't be blank"]} = errors_on(changeset)
+    end
+
+    defp errors_on(changeset) do
+      Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+        Regex.replace(~r"%{(\w+)}", message, fn _pattern, key ->
+          key_to_atom = String.to_existing_atom(key)
+
+          opts
+          |> Keyword.get(key_to_atom, key)
+          |> to_string()
+        end)
+      end)
     end
   end
 end

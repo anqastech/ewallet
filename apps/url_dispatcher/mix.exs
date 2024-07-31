@@ -10,7 +10,7 @@ defmodule UrlDispatcher.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -35,7 +35,7 @@ defmodule UrlDispatcher.Mixfile do
     [
       {:admin_api, in_umbrella: true},
       {:frontend, in_umbrella: true},
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:deferred_config, "~> 0.1.0"},
       {:ewallet, in_umbrella: true},
       {:ewallet_api, in_umbrella: true},

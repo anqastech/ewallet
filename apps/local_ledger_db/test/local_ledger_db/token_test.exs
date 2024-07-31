@@ -13,7 +13,8 @@
 # limitations under the License.
 
 defmodule LocalLedgerDB.TokenTest do
-  use ExUnit.Case, async: true
+  use LocalLedgerDB.SchemaCase, async: true
+
   import LocalLedgerDB.Factory
   alias Ecto.Adapters.SQL
   alias Ecto.Adapters.SQL.Sandbox
@@ -47,7 +48,7 @@ defmodule LocalLedgerDB.TokenTest do
     params = string_params_for(:token, %{id: nil})
     changeset = Token.changeset(%Token{}, params)
     refute changeset.valid?
-    assert changeset.errors == [id: {"can't be blank", [validation: :required]}]
+    assert %{id: ["can't be blank"]} = errors_on(changeset)
   end
 
   test "prevents creation of a token with an id already in DB" do
@@ -214,7 +215,7 @@ defmodule LocalLedgerDB.TokenTest do
         |> Token.insert()
 
       assert res == :error
-      assert changeset.errors == [id: {"can't be blank", [validation: :required]}]
+      assert %{id: ["can't be blank"]} = errors_on(changeset)
     end
   end
 end

@@ -14,7 +14,8 @@
 
 defmodule LocalLedger.Types.Integer do
   @moduledoc false
-  @behaviour Ecto.Type
+  use Ecto.Type
+
   def type, do: :integer
 
   def cast(value) do

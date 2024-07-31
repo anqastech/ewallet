@@ -252,7 +252,7 @@ defmodule EWalletConfig.ValidatorTest do
         |> validate_immutable(:attr1)
 
       refute changeset.valid?
-      assert changeset.errors == [{:attr1, {"can't be changed", []}}]
+      assert %{attr1: ["can't be changed"]} = errors_on(changeset)
     end
   end
 end

@@ -186,10 +186,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.insert(attrs)
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be one of 'abc', 'def'", [validation: :value_not_allowed]}
-             ]
+      assert %{value: ["must be one of 'abc', 'def'"]} = errors_on(changeset)
     end
 
     test "inserts a setting with an encrypted json" do
@@ -263,7 +260,7 @@ defmodule EWalletConfig.SettingTest do
                encrypted_fields: [:encrypted_data]
              }
 
-      assert changeset.errors == [key: {"can't be blank", [validation: :required]}]
+      assert %{key: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "fails to insert when type is not valid" do
@@ -283,7 +280,7 @@ defmodule EWalletConfig.SettingTest do
                encrypted_fields: [:encrypted_data]
              }
 
-      assert changeset.errors == [type: {"is invalid", [validation: :inclusion]}]
+      assert %{type: ["is invalid"]} = errors_on(changeset)
       assert changeset.valid? == false
       assert changeset.action == :insert
       assert %StoredSetting{} = changeset.data
@@ -376,10 +373,7 @@ defmodule EWalletConfig.SettingTest do
         Setting.update("my_key", %{value: "something_else", originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be one of 'abc', 'def', 'xyz'", [validation: :value_not_allowed]}
-             ]
+      assert %{value: ["must be one of 'abc', 'def', 'xyz'"]} = errors_on(changeset)
     end
 
     test "fails to update a setting when the value is not of the right type (string)" do
@@ -389,10 +383,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.update("my_key", %{value: 123, originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be of type 'string'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'string'"]} = errors_on(changeset)
     end
 
     test "fails to update a setting when the value is not of the right type (integer)" do
@@ -402,10 +393,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.update("my_key", %{value: "some_string", originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be of type 'integer'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'integer'"]} = errors_on(changeset)
     end
 
     test "fails to update a setting when the value is not of the right type (map)" do
@@ -420,10 +408,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.update("my_key", %{value: "some_string", originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be of type 'map'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'map'"]} = errors_on(changeset)
     end
 
     test "fails to update a setting when the value is not of the right type (array)" do
@@ -433,10 +418,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.update("my_key", %{value: "some_string", originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be of type 'array'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'array'"]} = errors_on(changeset)
     end
 
     test "fails to update a setting when the value is not of the right type (boolean)" do
@@ -446,10 +428,7 @@ defmodule EWalletConfig.SettingTest do
       {res, changeset} = Setting.update("my_key", %{value: "some_string", originator: %System{}})
 
       assert res == :error
-
-      assert changeset.errors == [
-               value: {"must be of type 'boolean'", [validation: :invalid_type_for_value]}
-             ]
+      assert %{value: ["must be of type 'boolean'"]} = errors_on(changeset)
     end
   end
 

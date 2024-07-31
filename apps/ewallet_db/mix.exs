@@ -10,8 +10,8 @@ defmodule EWalletDB.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -36,7 +36,7 @@ defmodule EWalletDB.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
@@ -44,11 +44,11 @@ defmodule EWalletDB.Mixfile do
   defp deps do
     [
       {:activity_logger, in_umbrella: true},
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:arc, "~> 0.11.0"},
-      {:arc_ecto, github: "omisego/arc_ecto"},
+      {:arc_ecto, github: "almirsarajcic/arc_ecto"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:cloak, "~> 0.9.1"},
+      {:cloak_ecto, "~> 1.1"},
       {:db, in_umbrella: true},
       {:deferred_config, "~> 0.1.0"},
       {:ecto_sql, "~> 3.0"},
@@ -58,7 +58,7 @@ defmodule EWalletDB.Mixfile do
       {:poison, "~> 3.1"},
       {:jason, "~> 1.1"},
       {:postgrex, ">= 0.0.0"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 

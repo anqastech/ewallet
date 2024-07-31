@@ -20,6 +20,12 @@ defmodule EWalletConfig.SchemaCase do
   alias Ecto.Adapters.SQL.Sandbox
   alias EWalletConfig.Repo
 
+  using do
+    quote do
+      import EWalletConfig.SchemaCase
+    end
+  end
+
   setup do
     # Restarts `EWalletConfig.Config` so it does not hang on to a DB connection for too long.
     Supervisor.terminate_child(EWalletConfig.Supervisor, EWalletConfig.Config)
@@ -27,5 +33,17 @@ defmodule EWalletConfig.SchemaCase do
 
     Sandbox.checkout(Repo)
     Sandbox.checkout(ActivityLogger.Repo)
+  end
+
+  def errors_on(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+      Regex.replace(~r"%{(\w+)}", message, fn _pattern, key ->
+        key_to_atom = String.to_existing_atom(key)
+
+        opts
+        |> Keyword.get(key_to_atom, key)
+        |> to_string()
+      end)
+    end)
   end
 end

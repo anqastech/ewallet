@@ -57,4 +57,6 @@ config :ewallet,
     "AWS_SECRET_ACCESS_KEY" => "aws_secret_access_key"
   }
 
+config :phoenix, :json_library, Jason
+
 import_config "#{Mix.env()}.exs"

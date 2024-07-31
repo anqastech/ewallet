@@ -14,7 +14,8 @@
 
 defmodule Frontend.PageControllerTest do
   use ExUnit.Case, async: true
-  use Phoenix.ConnTest
+  import Plug.Conn
+  import Phoenix.ConnTest
   alias Ecto.Adapters.SQL.Sandbox
 
   # Attributes required by Phoenix.ConnTest

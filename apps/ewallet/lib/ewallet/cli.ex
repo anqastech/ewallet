@@ -38,9 +38,9 @@ defmodule EWallet.CLI do
 
   def color(messages), do: messages |> format |> puts
 
-  def heading(message), do: Docs.print_heading(message, width: 100)
+  def heading(message), do: Docs.print_headings([message], width: 100)
 
-  def print(message), do: Docs.print(message, width: 100)
+  def print(message), do: Docs.print(message, "text/markdown", width: 100)
 
   @spec assume_yes?([String.t()]) :: boolean()
   def assume_yes?(args), do: Enum.any?(args, fn a -> a in @yes_params end)

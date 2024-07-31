@@ -125,7 +125,7 @@ defmodule LocalLedgerDB.Entry do
     address
     |> build_sum_query(type, options)
     |> Repo.all()
-    |> Enum.into(%{}, fn {k, v} -> {k, Decimal.to_integer(v)} end)
+    |> Enum.into(%{}, fn {k, v} -> {k, Decimal.to_integer(Decimal.new(v))} end)
   end
 
   defp build_sum_query(address, type, %{token_id: id, since: since, upto: upto}) do
@@ -172,9 +172,12 @@ defmodule LocalLedgerDB.Entry do
   substracting one from the other.
   """
   def calculate_current_amount(address, token_id) do
-    credit = sum_entries_amount(address, token_id, @credit) || Decimal.new(0)
-    debit = sum_entries_amount(address, token_id, @debit) || Decimal.new(0)
-    Decimal.to_integer(credit) - Decimal.to_integer(debit)
+    credit = sum_entries_amount(address, token_id, @credit) || 0
+    debit = sum_entries_amount(address, token_id, @debit) || 0
+
+    Decimal.new(credit)
+    |> Decimal.sub(Decimal.new(debit))
+    |> Decimal.to_integer()
   end
 
   defp sum_entries_amount(address, token_id, type) do

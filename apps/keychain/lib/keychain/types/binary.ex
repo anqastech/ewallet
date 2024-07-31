@@ -15,5 +15,5 @@
 defmodule Keychain.Encrypted.Binary do
   @moduledoc false
 
-  use Cloak.Fields.Binary, vault: Keychain.Vault
+  use Cloak.Ecto.Binary, vault: Keychain.Vault
 end

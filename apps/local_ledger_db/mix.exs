@@ -10,8 +10,8 @@ defmodule LocalLedgerDB.Mixfile do
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env),
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -34,8 +34,8 @@ defmodule LocalLedgerDB.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
-      {:cloak, "~> 0.9.1"},
+      {:appsignal, "~> 1.13.5"},
+      {:cloak_ecto, "~> 1.1"},
       {:db, in_umbrella: true},
       {:deferred_config, "~> 0.1.0"},
       {:ecto_sql, "~> 3.0"},

@@ -57,4 +57,6 @@ defmodule DB.SharedConnectionPool do
   defp start_opts(opts) do
     Keyword.take(opts, [:name, :spawn_opt])
   end
+
+  defdelegate checkout(pool, callers, opts), to: ConnectionPool
 end

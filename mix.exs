@@ -56,6 +56,13 @@ defmodule EWallet.Umbrella.Mixfile do
       ],
       seed: [
         "omg.seed"
+      ],
+      setup: [
+        "deps.get",
+        "ecto.create",
+        "ecto.migrate",
+        "seed",
+        "cmd --app frontend npm install --prefix assets"
       ]
     ]
   end

@@ -32,7 +32,7 @@ defmodule ActivityLogger.TestDocument do
 
     field(:title, :string)
     field(:body, :string)
-    field(:secret_data, ActivityLogger.Encrypted.Map, default: %{})
+    field(:secret_data, ActivityLogger.Encrypted.Map, default: %{}, skip_default_validation: true)
 
     timestamps()
     activity_logging()

@@ -13,7 +13,8 @@
 # limitations under the License.
 
 defmodule LocalLedgerDB.WalletTest do
-  use ExUnit.Case, async: true
+  use LocalLedgerDB.SchemaCase, async: true
+
   import LocalLedgerDB.Factory
   alias Ecto.Adapters.SQL
   alias Ecto.Adapters.SQL.Sandbox
@@ -59,7 +60,7 @@ defmodule LocalLedgerDB.WalletTest do
       params = string_params_for(:wallet, %{address: nil})
       changeset = Wallet.changeset(%Wallet{}, params)
       refute changeset.valid?
-      assert changeset.errors == [address: {"can't be blank", [validation: :required]}]
+      assert %{address: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "prevents creation of a wallet with an address already in DB" do
@@ -237,7 +238,7 @@ defmodule LocalLedgerDB.WalletTest do
         |> Wallet.insert()
 
       assert res == :error
-      assert changeset.errors == [address: {"can't be blank", [validation: :required]}]
+      assert %{address: ["can't be blank"]} = errors_on(changeset)
     end
   end
 

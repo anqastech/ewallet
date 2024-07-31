@@ -25,7 +25,7 @@ defmodule Utils.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
+      {:appsignal, "~> 1.13.5"},
       {:ex_ulid, github: "omisego/ex_ulid"}
     ]
   end

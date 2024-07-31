@@ -180,7 +180,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [schema: {"can't be blank", [validation: :required]}]
+      assert %{schema: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns error when `:status` is not present", context do
@@ -189,7 +189,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [status: {"can't be blank", [validation: :required]}]
+      assert %{status: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns error when `:completion` is not present", context do
@@ -198,7 +198,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [completion: {"can't be blank", [validation: :required]}]
+      assert %{completion: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns error when `:completion` is less than 0", context do
@@ -235,7 +235,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [params: {"can't be blank", [validation: :required]}]
+      assert %{params: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns error when both `:user_uuid` and `:key_uuid` are provided", context do
@@ -257,7 +257,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [format: {"is invalid", [validation: :inclusion]}]
+      assert %{format: ["is invalid"]} = errors_on(changeset)
     end
 
     test "returns error when the given `status` is not recognized", context do
@@ -266,7 +266,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [status: {"is invalid", [validation: :inclusion]}]
+      assert %{status: ["is invalid"]} = errors_on(changeset)
     end
 
     test "returns error when the given `user_uuid` is not found", context do
@@ -352,7 +352,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [status: {"can't be blank", [validation: :required]}]
+      assert %{status: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "returns an invalid changeset when given `completion` nil", context do
@@ -361,7 +361,7 @@ defmodule EWalletDB.ExportTest do
 
       assert res == :error
       refute changeset.valid?
-      assert changeset.errors == [completion: {"can't be blank", [validation: :required]}]
+      assert %{completion: ["can't be blank"]} = errors_on(changeset)
     end
   end
 end

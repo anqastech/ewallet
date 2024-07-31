@@ -39,15 +39,15 @@ defmodule ActivityLogger.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:appsignal, "~> 1.9"},
-      {:cloak, "~> 0.9.1"},
+      {:appsignal, "~> 1.13.5"},
+      {:cloak_ecto, "~> 1.1"},
       {:db, in_umbrella: true},
       {:deferred_config, "~> 0.1.0"},
       {:ecto_sql, "~> 3.0"},
       {:ex_machina, "~> 2.2", only: :test},
       {:poison, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
-      {:utils, in_umbrella: true},
+      {:utils, in_umbrella: true}
     ]
   end
 
